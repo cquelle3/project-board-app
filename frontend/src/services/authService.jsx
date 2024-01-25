@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const AUTH_URL = 'http://localhost:3001/auth';
+const AUTH_URL = `${import.meta.env.VITE_SERVER_URL}/auth`;
 
 const AuthService = {
     register: function(username, password){

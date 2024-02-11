@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const apiRoutes = require('./apiRoutes');
 const authRoutes = require('./authRoutes');
+const ping = require('./ping');
 
 //accesses .env file for project
 require('dotenv').config();
@@ -15,7 +16,7 @@ const PORT = 3001;
 app.use(cors({
     origin: `${process.env.FRONTEND_URL}`
 }));
-app.use(bodyParser.json({ limit: '16mb' }));
+app.use(bodyParser.json({ limit: '100mb' }));
 
 app.use('/api', apiRoutes);
 app.use('/auth', authRoutes);
@@ -27,7 +28,10 @@ const start = async () => {
         );
 
         app.listen(PORT, (err) => {
-            if(!err) console.log(`Server running on port ${PORT}`);
+            if(!err){
+                console.log(`Server running on port ${PORT}`);
+                ping.start();
+            }
             else console.log("Error occurred, server can't start", err);
         });
     }

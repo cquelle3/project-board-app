@@ -21,6 +21,10 @@ app.use(bodyParser.json({ limit: '100mb' }));
 app.use('/api', apiRoutes);
 app.use('/auth', authRoutes);
 
+app.get('/', function(req, res) {
+    res.send('hello!').status(200);
+});
+
 const start = async () => {
     try{
         await mongoose.connect(
